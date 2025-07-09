@@ -14,9 +14,9 @@
                         <h5 class="card-title">
                             {{ scene.title }}
                             {% if scene.ready %}
-                                <span class="badge bg-success">Ready</span>
+                                <span class="badge bg-success">Scene Accepted</span>
                             {% else %}
-                                <span class="badge bg-warning text-dark">Not Ready</span>
+                                <span class="badge bg-warning text-dark">Scene Not Yet Accepted</span>
                             {% endif %}
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ scene.auction.name }} ({{ scene.auction.date }})</h6>

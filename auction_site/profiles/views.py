@@ -3,11 +3,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from .forms import ForcedPasswordChangeForm, ProfileForm
+from scenes.models import Scene
 
 
 @login_required
 def dashboard(request):
-    return render(request, "profiles/dashboard.html")
+    profile = request.user.profile
+    scenes = (
+        Scene.objects.filter(profile=profile)
+        .select_related("auction")
+        .order_by("-auction__date")
+    )
+    has_scenes = scenes.exists()
+    return render(
+        request, "profiles/dashboard.html", {"scenes": scenes, "has_scenes": has_scenes}
+    )
 
 
 @login_required

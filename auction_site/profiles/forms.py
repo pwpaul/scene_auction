@@ -15,7 +15,7 @@ class ProfileForm(forms.ModelForm):
             "name",
             "fet",
             "pronouns",
-            "pic",
+            "pic_original",
             "ref_pronouns",
             "ref_name",
             "ref_phys",

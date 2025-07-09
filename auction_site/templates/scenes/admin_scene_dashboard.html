@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Scene Validation Dashboard</h2>
+    <p class="text-muted">Quickly review and mark scenes as ready.</p>
+
+    <table class="table table-hover mt-4">
+        <thead class="table-light">
+            <tr>
+                <th>Auction</th>
+                <th>Participant</th>
+                <th>Scene</th>
+                <th>Eligible Bidders</th>
+                <th>Other</th>
+                <th>Ready</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scene in scenes %}
+            <tr>
+                <td>{{ scene.auction.name }}<br><small>{{ scene.auction.date }}</small></td>
+                <td>
+                    <strong>{{ scene.profile.name }}</strong><br>
+                    <small>{{ scene.profile.pronouns }}</small>
+                </td>
+                <td>
+                    <strong>{{ scene.title }}</strong><br>
+                    {{ scene.short|truncatewords:10 }}
+                </td>
+                <td>
+                    {% for bidder in scene.eligible_bidders.all %}
+                        <span class="badge bg-info text-dark">{{ bidder.code }}</span>
+                    {% endfor %}
+                </td>
+                <td>{{ scene.other_bidders }}</td>
+                <td>
+                    {% if scene.ready %}
+                        <span class="badge bg-success">Yes</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not scene.ready %}
+                        <a href="{% url 'toggle_scene_ready' scene.id %}" class="btn btn-sm btn-success">Mark Ready</a>
+                    {% else %}
+                        <a href="{% url 'toggle_scene_ready' scene.id %}" class="btn btn-sm btn-secondary">Unmark</a>
+                    {% endif %}
+                        <a href="{% url 'projection_view' scene.id scene.profile.name|default:scene.profile.user.username|slugify %}">Project</a>
+
+
+
+            </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No scenes submitted yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

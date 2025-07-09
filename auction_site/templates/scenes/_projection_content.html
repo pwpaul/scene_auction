@@ -1,0 +1,26 @@
+<div class="row align-items-center">
+    <div class="col-md-4 text-center mb-4">
+        {% if scene.profile.pic %}
+            <img src="{{ scene.profile.pic.url }}" class="img-fluid rounded shadow" alt="Profile Picture">
+        {% else %}
+            <img src="https://via.placeholder.com/300" class="img-fluid rounded shadow" alt="Profile Picture">
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1 class="display-4">{{ scene.title }}</h1>
+        <h4>{{ scene.profile.name }} <small class="text-muted">({{ scene.profile.pronouns }})</small></h4>
+        <h5 class="mb-3">{{ scene.auction.name }} - {{ scene.auction.date }}</h5>
+        <p class="lead">{{ scene.short }}</p>
+        <p>{{ scene.long }}</p>
+
+        <h6>Eligible Bidders:</h6>
+        <div>
+            {% for bidder in scene.eligible_bidders.all %}
+                <span class="badge bg-info text-dark fs-6 me-2">{{ bidder.code }}</span>
+            {% endfor %}
+            {% if scene.other_bidders %}
+                <span class="badge bg-secondary fs-6">{{ scene.other_bidders }}</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
