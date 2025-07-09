@@ -1,0 +1,10 @@
+# Core
+Django
+Pillow
+django-htmx
+django-bootstrap5
+django-crispy-forms
+whitenoise
+python-dotenv
+
+django-debug-toolbar

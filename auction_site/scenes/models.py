@@ -1,0 +1,49 @@
+from django.db import models
+
+
+class Auction(models.Model):
+    name = models.CharField(max_length=200)
+    date = models.DateField()
+    desc = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.name} on {self.date}"
+
+
+class EligibleBidder(models.Model):
+    code = models.CharField(max_length=20, unique=True)
+    desc = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.code} ({self.desc})"
+
+
+class Scene(models.Model):
+    auction = models.ForeignKey(
+        Auction, on_delete=models.CASCADE, related_name="scenes"
+    )
+    profile = models.ForeignKey(
+        "profiles.Profile", on_delete=models.CASCADE, related_name="scenes"
+    )
+
+    role = models.CharField(
+        max_length=10, choices=[("top", "Top"), ("bottom", "Bottom")]
+    )
+    eligible_bidders = models.ManyToManyField(EligibleBidder, blank=True)
+    other_bidders = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Any other specific bidder audience not listed",
+    )
+
+    title = models.CharField(max_length=200)
+    short = models.TextField()
+    long = models.TextField(blank=True)
+
+    ready = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ("auction", "profile")
+
+    def __str__(self):
+        return f"{self.title} by {self.profile.user.username} in {self.auction.name}"

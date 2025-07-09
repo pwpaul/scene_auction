@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Dashboard</h2>
+    <p class="text-muted">Welcome, {{ user.username }}! Here are your submitted scenes:</p>
+
+    {% if scenes %}
+        <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+            {% for scene in scenes %}
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ scene.title }}
+                            {% if scene.ready %}
+                                <span class="badge bg-success">Ready</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">Not Ready</span>
+                            {% endif %}
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ scene.auction.name }} ({{ scene.auction.date }})</h6>
+                        <p class="card-text"><strong>Role:</strong> {{ scene.role|capfirst }}</p>
+                        
+                        {% if scene.eligible_bidders.all %}
+                        <p class="card-text">
+                            <strong>Eligible Bidders:</strong> 
+                            {% for bidder in scene.eligible_bidders.all %}
+                                <span class="badge bg-info text-dark">{{ bidder.code }}</span>
+                            {% endfor %}
+                        </p>
+                        {% endif %}
+
+                        {% if scene.other_bidders %}
+                        <p class="card-text">
+                            <strong>Other:</strong> {{ scene.other_bidders }}
+                        </p>
+                        {% endif %}
+
+                        <p class="card-text">{{ scene.short|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer text-end bg-transparent border-0">
+                        <a href="{% url 'add_scene' scene.auction.id %}" class="btn btn-sm btn-outline-primary">Edit Scene</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="mt-4">You haven’t submitted any scenes yet. 
+            <a href="{% url 'auction_list' %}">Submit one now!</a>
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
