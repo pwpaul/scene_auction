@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="display-4">Welcome to the Scene Auction!</h1>
+            <p class="lead">
+                This is a fun, safe, and consensual space where folks can auction off playful scenes.
+                Everything is designed with consent, exploration, and community in mind.
+            </p>
+            <p>
+                More details about the next auction will appear here soon. Stay tuned!
+            </p>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg mt-3">Go to Your Dashboard</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <h3>Helpful Resources</h3>
+            <ul class="list-group mt-3">
+                <li class="list-group-item">
+                    <a href="https://fetlife.com/" target="_blank">FetLife - Kink Social Network</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="https://www.ncsfreedom.org/" target="_blank">NCSF - National Coalition for Sexual Freedom</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="https://www.scarleteen.com/article/sexual_health/safer_sex_for_kink" target="_blank">Safer Sex for Kink</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" target="_blank">Local Groups Directory (Coming Soon)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

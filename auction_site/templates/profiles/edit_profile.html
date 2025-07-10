@@ -1,29 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container mt-4">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Welcome, {{ user.username }}!</h2>
-            <p>This is your dashboard. From here you can:</p>
-            <ul class="list-group list-group-flush mt-3">
-                <li class="list-group-item">
-                    <a href="{% url 'edit_profile' %}">Edit your profile</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="{% url 'auction_list' %}">Submit a scene to an auction</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4 text-center">
-            {% if user.profile.pic %}
-                <img src="{{ user.profile.pic.url }}" class="img-fluid rounded" alt="Profile Picture">
-            {% else %}
-                <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Profile Picture">
-            {% endif %}
-            <p class="mt-2"><strong>{{ user.profile.name }}</strong></p>
-            <p>{{ user.profile.pronouns }}</p>
-        </div>
-    </div>
+    <h2>Edit Your Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    </form>
 </div>
 {% endblock %}

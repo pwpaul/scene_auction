@@ -9,4 +9,5 @@ urlpatterns = [
         views.force_password_change,
         name="force_password_change",
     ),
+    path("profile/edit/", views.edit_profile, name="edit_profile"),
 ]

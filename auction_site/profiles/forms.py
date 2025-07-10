@@ -22,3 +22,13 @@ class ProfileForm(forms.ModelForm):
             "ref_words",
             "ref_no_words",
         ]
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'name', 'fet', 'pronouns', 'pic_original',
+            'ref_pronouns', 'ref_name', 'ref_phys', 'ref_words', 'ref_no_words'
+        ]
+

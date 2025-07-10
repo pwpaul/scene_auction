@@ -7,6 +7,19 @@ from scenes.models import Scene
 
 
 @login_required
+def edit_profile(request):
+    profile = request.user.profile
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'profiles/edit_profile.html', {'form': form})
+@login_required
 def dashboard(request):
     profile = request.user.profile
     scenes = (
@@ -48,3 +61,8 @@ def force_password_change(request):
     else:
         form = ForcedPasswordChangeForm(user=request.user)
     return render(request, "profiles/force_password_change.html", {"form": form})
+
+
+def home(request):
+    return render(request, 'home.html')
+
