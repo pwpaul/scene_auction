@@ -1,0 +1,19 @@
+.accordion-button {
+    transition: transform 0.1s ease-in-out;
+}
+.accordion-button:hover {
+    transform: scale(1.02);
+}
+.transition-icon {
+    transition: transform 0.3s ease;
+}
+.accordion-button:not(.collapsed) .bi-plus::before {
+    content: "\f2ea"; /* Unicode for bi-dash */
+    font-family: "bootstrap-icons";
+}
+.custom-answer-background-color {
+    background-color: #fff2dc; /* light gray */
+}
+.transparent-background {
+    background: transparent;
+}
