@@ -55,17 +55,6 @@ def toggle_scene_ready(request, scene_id):
     return redirect("admin_scene_dashboard")
 
 
-# @staff_member_required
-# def projection_view(request, scene_id, slug=None):
-#     scene = get_object_or_404(
-#         Scene.objects.select_related("profile__user", "auction").prefetch_related(
-#             "eligible_bidders"
-#         ),
-#         id=scene_id,
-#     )
-#     return render(request, "scenes/projection.html", {"scene": scene})
-
-
 @staff_member_required
 def projection_view(request, scene_id, slug=None):
     scene = get_object_or_404(

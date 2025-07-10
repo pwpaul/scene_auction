@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="accordion custom-answer-background-color" id="wtfAuctionFAQ">
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingTime">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseTime" aria-expanded="false" aria-controls="collapseTime">
+                <i class="bi bi-clock me-2 transition-icon"></i> What time does the event start and what’s the schedule?
+            </button>
+        </h2>
+        <div id="collapseTime" class="accordion-collapse collapse" aria-labelledby="headingTime" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                <strong>Doors open:</strong> 1:00 PM on August 3rd, 2025<br>
+                <strong>Auction begins:</strong> 1:45 PM sharp. Doors close and won’t reopen until 3:00.<br>
+                <strong>Party starts:</strong> Immediately after the auction.<br>
+                <strong>Re-entry:</strong> Doors reopen from 3:00–4:00 PM.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingAuctioned">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAuctioned" aria-expanded="false" aria-controls="collapseAuctioned">
+                <i class="bi bi-people-fill me-2 transition-icon"></i> How many people can be auctioned off? Can I be one of them?
+            </button>
+        </h2>
+        <div id="collapseAuctioned" class="accordion-collapse collapse" aria-labelledby="headingAuctioned" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Capping at <strong>12 scene offerings</strong>.<br>
+                Say so when buying your ticket. Fill out the questionnaire. Day-of slots possible if any remain.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingAttend">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAttend" aria-expanded="false" aria-controls="collapseAttend">
+                <i class="bi bi-shield-lock me-2 transition-icon"></i> Who can attend the auction? Is there vetting or an age requirement?
+            </button>
+        </h2>
+        <div id="collapseAttend" class="accordion-collapse collapse" aria-labelledby="headingAttend" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                This is an <strong>18+ event</strong> — valid ID required.<br>
+                Vetted members of The Owls Nest get first ticket access. Limited non-vetted tickets released later. Some advanced play is restricted to known players. Newcomers offering scenes will be introduced as fresh so everyone knows.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingTickets">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseTickets" aria-expanded="false" aria-controls="collapseTickets">
+                <i class="bi bi-ticket-detailed me-2 transition-icon"></i> How do I get a ticket and what does it cost?
+            </button>
+        </h2>
+        <div id="collapseTickets" class="accordion-collapse collapse" aria-labelledby="headingTickets" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Tickets released in waves:<br>
+                • <strong>$40</strong> — Before July 20th<br>
+                • <strong>$45</strong> — July 20th to August 1st<br>
+                • <strong>$50</strong> — After August 1st if any remain.<br>
+                Vetted members get first crack. Link coming soon.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingDungeon">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseDungeon" aria-expanded="false" aria-controls="collapseDungeon">
+                <i class="bi bi-house-heart me-2 transition-icon"></i> What kind of play space and equipment will be available?
+            </button>
+        </h2>
+        <div id="collapseDungeon" class="accordion-collapse collapse" aria-labelledby="headingDungeon" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                The full Owls Nest dungeon will be open & monitored by DMs. More intimate scenes, less impact. Auction scenes get furniture priority, then it’s open to everyone. Winners get first choice of space.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingStorage">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseStorage" aria-expanded="false" aria-controls="collapseStorage">
+                <i class="bi bi-box-seam me-2 transition-icon"></i> Is there a place to store gear or chill out if I’m not playing?
+            </button>
+        </h2>
+        <div id="collapseStorage" class="accordion-collapse collapse" aria-labelledby="headingStorage" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Yes. Designated gear storage and a lounge area for chatting, flirting, resting, or snacking.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingFood">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseFood" aria-expanded="false" aria-controls="collapseFood">
+                <i class="bi bi-cup-straw me-2 transition-icon"></i> Will there be snacks or drinks available?
+            </button>
+        </h2>
+        <div id="collapseFood" class="accordion-collapse collapse" aria-labelledby="headingFood" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Some snacks provided. Feel free to bring snacks to share and your own non-alcoholic drinks.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingPhotos">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapsePhotos" aria-expanded="false" aria-controls="collapsePhotos">
+                <i class="bi bi-camera-off me-2 transition-icon"></i> Can I take photos or selfies during the event?
+            </button>
+        </h2>
+        <div id="collapsePhotos" class="accordion-collapse collapse" aria-labelledby="headingPhotos" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                No. This is a no-photo event to protect privacy. Staff photographer may appear in designated zones only.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingAccessibility">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAccessibility" aria-expanded="false" aria-controls="collapseAccessibility">
+                <i class="bi bi-universal-access me-2 transition-icon"></i> Are there accessibility accommodations available?
+            </button>
+        </h2>
+        <div id="collapseAccessibility" class="accordion-collapse collapse" aria-labelledby="headingAccessibility" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                For accessibility details, please visit The Nest's Fetlife profile.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingContact">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
+                <i class="bi bi-envelope-open me-2 transition-icon"></i> Who do I contact with questions?
+            </button>
+        </h2>
+        <div id="collapseContact" class="accordion-collapse collapse" aria-labelledby="headingContact" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Contact the host <strong>PA_Alpha on Fetlife</strong>.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item shadow-sm mb-3 rounded custom-answer-background-color">
+        <h2 class="accordion-header" id="headingNegotiation">
+            <button class="accordion-button collapsed py-3 px-4 custom-answer-background-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseNegotiation" aria-expanded="false" aria-controls="collapseNegotiation">
+                <i class="bi bi-hand-thumbs-up me-2 transition-icon"></i> I want help negotiating during the auction
+            </button>
+        </h2>
+        <div id="collapseNegotiation" class="accordion-collapse collapse" aria-labelledby="headingNegotiation" data-bs-parent="#wtfAuctionFAQ">
+            <div class="accordion-body text-start custom-answer-background-color">
+                Negotiation Ambassadors are there to help. A negotiation that decides not to do a scene is still a success — everyone’s comfort matters.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

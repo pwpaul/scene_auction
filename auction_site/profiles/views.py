@@ -68,3 +68,7 @@ def home(request):
         return render(request, 'home.html')
     return render(request, "public_home.html")
 
+def faq(request):
+    return render(request, 'faq.html')
+
+

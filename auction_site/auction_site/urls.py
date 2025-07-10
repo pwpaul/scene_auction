@@ -11,5 +11,6 @@ urlpatterns = [
     path("", profile_views.home, name="home"),
     path("dashboard/", profile_views.dashboard, name="dashboard"),
     path("profile/edit/", profile_views.edit_profile, name="edit_profile"),
+    path("faq/", profile_views.faq, name="faq"),
 
 ]
