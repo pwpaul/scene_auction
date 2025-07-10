@@ -56,7 +56,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTH_USER_MODEL = "profiles.User"
-LOGIN_REDIRECT_URL = "/dashboard/"
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 
