@@ -64,5 +64,7 @@ def force_password_change(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    if request.user.is_authenticated:
+        return render(request, 'home.html')
+    return render(request, "public_home.html")
 

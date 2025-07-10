@@ -9,3 +9,4 @@ python-dotenv
 django-admin-sortable2
 django-debug-toolbar
 crispy_bootstrap5
+python-decouple

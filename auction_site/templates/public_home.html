@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Scene Auction</h1>
+        <p class="lead">A playful, consensual space to explore fun scenes and creative bids.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3">Login</a>
+    </div>
+
+    <hr class="my-5">
+
+    <h3>Helpful Resources</h3>
+    <ul class="list-group mt-3">
+        <li class="list-group-item">
+            <a href="https://fetlife.com/" target="_blank">FetLife - Kink Social Network</a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://www.ncsfreedom.org/" target="_blank">NCSF - National Coalition for Sexual Freedom</a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://www.scarleteen.com/article/sexual_health/safer_sex_for_kink" target="_blank">Safer Sex for Kink</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
