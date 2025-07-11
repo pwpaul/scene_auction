@@ -17,3 +17,37 @@
 .transparent-background {
     background: transparent;
 }
+
+/* ========= DARK MODE ========= */
+.dark-mode {
+    background-color: #000 !important;
+    color: #f8f9fa !important;
+}
+.dark-mode h1, .dark-mode h2, .dark-mode h3, 
+.dark-mode h4, .dark-mode h5, .dark-mode h6, 
+.dark-mode p, .dark-mode small {
+    color: #f8f9fa !important;
+}
+.dark-mode .badge.bg-info {
+    background-color: #3498db !important;
+    color: #fff !important;
+}
+.dark-mode .badge.bg-secondary {
+    background-color: #555 !important;
+    color: #f8f9fa !important;
+}
+.dark-mode footer {
+    background-color: #111 !important;
+    border-top-color: #333 !important;
+}
+.dark-mode footer small {
+    color: #ccc !important;
+}
+
+/* ========= DARK MODE TOGGLE BUTTON ========= */
+#dark-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}

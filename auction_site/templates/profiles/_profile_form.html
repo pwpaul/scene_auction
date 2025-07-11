@@ -1,14 +1,8 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
-
-{% block content %}
-<div class="container mt-4">
-    <h2>Edit Your Profile</h2>
-    <div id="profile-form"></div>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+<div id="profile-form">
+    <form method="post" enctype="multipart/form-data" hx-post="{% url 'edit_profile' %}" hx-target="#profile-form" hx-swap="outerHTML">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-2">Save</button>
 
         {% if form.errors %}
             <div class="alert alert-danger mt-3">
@@ -24,7 +18,5 @@
                 </ul>
             </div>
         {% endif %}
-        </form>
-    </div>
+    </form>
 </div>
-{% endblock %}

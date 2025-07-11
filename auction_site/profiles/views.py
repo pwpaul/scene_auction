@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 from django.contrib import messages
 from .forms import ForcedPasswordChangeForm, ProfileForm
 from scenes.models import Scene
@@ -33,18 +35,36 @@ def dashboard(request):
     )
 
 
+# @login_required
+# def edit_profile(request):
+#     profile = request.user.profile
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Profile updated successfully.")
+#             return redirect("dashboard")
+#     else:
+#         form = ProfileForm(instance=profile)
+#     return render(request, "profiles/edit_profile.html", {"form": form})
+
 @login_required
 def edit_profile(request):
     profile = request.user.profile
-    if request.method == "POST":
+    if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully.")
-            return redirect("dashboard")
+            return redirect('dashboard')
     else:
         form = ProfileForm(instance=profile)
-    return render(request, "profiles/edit_profile.html", {"form": form})
+
+    if request.headers.get('Hx-Request'):
+        html = render_to_string('profiles/_profile_form.html', {'form': form}, request)
+        return HttpResponse(html)
+
+    return render(request, 'profiles/edit_profile.html', {'form': form})
 
 
 @login_required
