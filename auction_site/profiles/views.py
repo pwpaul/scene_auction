@@ -21,6 +21,8 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, 'profiles/edit_profile.html', {'form': form})
+
+
 @login_required
 def dashboard(request):
     profile = request.user.profile
@@ -69,6 +71,10 @@ def edit_profile(request):
 
 @login_required
 def force_password_change(request):
+
+    if not request.user.must_change_password:
+        return redirect('dashboard')
+    
     if request.method == "POST":
         form = ForcedPasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():

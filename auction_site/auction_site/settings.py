@@ -11,12 +11,16 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [ BASE_DIR / 'assets' ]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -29,7 +33,6 @@ SECRET_KEY = 'django-insecure-_n&r)g!e2&3odgqoj)1k7s%56sa3!fthq!)uensk1wy_nt-4$9
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-from decouple import config, Csv
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 SECRET_KEY = config('SECRET_KEY')
