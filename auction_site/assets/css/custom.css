@@ -1,19 +1,90 @@
+/* ========= ACCORDION ENHANCEMENTS ========= */
 .accordion-button {
     transition: transform 0.1s ease-in-out;
 }
+
 .accordion-button:hover {
     transform: scale(1.02);
 }
+
 .transition-icon {
     transition: transform 0.3s ease;
 }
+
 .accordion-button:not(.collapsed) .bi-plus::before {
-    content: "\f2ea"; /* Unicode for bi-dash */
+    content: "\f2ea";
+    /* Unicode for bi-dash */
     font-family: "bootstrap-icons";
 }
+
+/* ========= CUSTOM COLORS ========= */
 .custom-answer-background-color {
-    background-color: #fff2dc; /* light gray */
+    background-color: #fff2dc;
+    /* warm light color for special blocks */
 }
+
 .transparent-background {
     background: transparent;
+}
+
+/* ========= DARK MODE STYLES ========= */
+.dark-mode {
+    background-color: #000 !important;
+    color: #f8f9fa !important;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode p,
+.dark-mode small {
+    color: #f8f9fa !important;
+}
+
+/* Dark mode badges */
+.dark-mode .badge.bg-info {
+    background-color: #3498db !important;
+    color: #fff !important;
+}
+
+.dark-mode .badge.bg-secondary {
+    background-color: #555 !important;
+    color: #f8f9fa !important;
+}
+
+/* Dark mode footer */
+.dark-mode footer {
+    background-color: #111 !important;
+    border-top-color: #333 !important;
+}
+
+.dark-mode footer small {
+    color: #ccc !important;
+}
+
+/* ========= DARK MODE TOGGLE BUTTON ========= */
+#dark-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* ========= OPTIONAL SMOOTH TRANSITION =*/
+
+body,
+.card,
+footer,
+.accordion-button,
+.badge {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Dark mode card tweaks if you use Bootstrap cards */
+.dark-mode .card {
+    background-color: #1c1c1c !important;
+    border-color: #333 !important;
 }
