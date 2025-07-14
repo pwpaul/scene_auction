@@ -174,3 +174,5 @@ cython_debug/
 .pypirc
 .vscode/launch.json
 .gitignore
+my_scene_auction_project.zip
+/auction_site/media/

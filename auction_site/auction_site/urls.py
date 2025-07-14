@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from profiles import views as profile_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -14,3 +16,6 @@ urlpatterns = [
     path("faq/", profile_views.faq, name="faq"),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
