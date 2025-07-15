@@ -1,36 +1,56 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from django.utils.crypto import get_random_string
 from profiles.models import Profile
+from django.utils.crypto import get_random_string
+from pathlib import Path
+import platform
 
-User = get_user_model()
 
 class Command(BaseCommand):
-    help = "Create a new auction user with random password and blank profile"
+    help = "Creates users & profiles from a comma-separated list. Outputs: username, password if created, or username, already exists."
 
     def add_arguments(self, parser):
-        parser.add_argument('username', type=str, help='Username for the new user')
+        parser.add_argument(
+            "--users", type=str, help="Comma-separated list of usernames", required=True
+        )
 
     def handle(self, *args, **options):
-        username = options['username']
+        User = get_user_model()
+        user_list = options["users"].split(",")
 
-        if User.objects.filter(username=username).exists():
-            self.stdout.write(self.style.WARNING(f"User '{username}' already exists."))
-            return
+        system = platform.system()
+        home = Path.home()
 
-        password = get_random_string(10)
-        user = User.objects.create_user(username=username, password=password)
-        user.must_change_password = True
-        user.save()
-
-        profile, created = Profile.objects.get_or_create(user=user)
-
-        if created:
-            self.stdout.write(self.style.SUCCESS(f"Profile created for '{username}'"))
+        if system == "Windows":
+            output_file = home / "Documents" / "auction" / "users" / "created_users.txt"
         else:
-            self.stdout.write(self.style.WARNING(f"Profile already exists for '{username}'"))
+            output_file = home / "created_users.txt"
 
-        self.stdout.write(self.style.SUCCESS(f"User '{username}' created."))
-        self.stdout.write(f"Login URL: http://127.0.0.1:8000/accounts/login/")
-        self.stdout.write(f"Username: {username}")
-        self.stdout.write(f"Password: {password}")
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+
+        self.stdout.write(self.style.NOTICE(f"Logging results to: {output_file}"))
+
+        with open(output_file, "a") as f:
+            for username in user_list:
+                username = username.strip()
+                if not username:
+                    continue
+
+                user, created = User.objects.get_or_create(username=username)
+
+                if created:
+                    # Generate random password
+                    password = get_random_string(10)
+                    user.set_password(password)
+                    user.save()
+
+                    # Ensure Profile exists
+                    Profile.objects.get_or_create(user=user)
+
+                    line = f"{username}, {password}"
+                    self.stdout.write(self.style.SUCCESS(f"Created: {line}"))
+                else:
+                    line = f"{username}, already exists"
+                    self.stdout.write(self.style.WARNING(f"{line}"))
+
+                f.write(line + "\n")
