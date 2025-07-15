@@ -24,8 +24,6 @@ class ProfileForm(forms.ModelForm):
             "fet",
             "pronouns",
             "pic_original",
-            "ref_pronouns",
-            "ref_name",
             "ref_phys",
             "ref_words",
             "ref_no_words",

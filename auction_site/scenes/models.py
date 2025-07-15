@@ -37,14 +37,14 @@ class Scene(models.Model):
         verbose_name="Eligible Bidders (Select All That Apply - Optional)",
         help_text="This is an effort to make sure bidders are compatible in more sexually based scenes.<p> This is optional for scenes where sexual contact is not available.</p>",
     )
-    other_bidders = models.CharField(
+    other_bidders = models.CharField("Other Eligible Bidders",
         max_length=200,
         blank=True,
         help_text="Any other specific bidder audience not listed (I tried but you know better than I do).",
     )
 
-    title = models.CharField(max_length=200, help_text="This is the title the auctioneer will use for your scene")
-    short = models.TextField("Short Scene Description", blank=True, help_text="Main description for the auctioneer and audience.<p> Please be explicit if sexual contact is included.  All contact is negotated before scene happens </p>")
+    title = models.CharField(max_length=200, blank=False, help_text="This is the title the auctioneer will use for your scene")
+    short = models.TextField("Short Scene Description", blank=False, help_text="Main description for the auctioneer and audience.<p> Please be explicit if sexual contact is included.  All contact is negotated before scene happens </p>")
     long = models.TextField("Long Scene Description", blank=True, help_text="Optional longer description, will help the auctioneer be more descriptive.")
 
     ready = models.BooleanField(default=False)

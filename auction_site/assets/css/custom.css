@@ -78,7 +78,7 @@ body.dark-mode .footer {
 }
 
 body.dark-mode .projection-column {
-    background-color: #212121;
+    background-color: #212;
     padding: 1rem;
     border-radius: 0.5rem;
 }
@@ -98,4 +98,44 @@ body.dark-mode .projection-column {
     bottom: 20px;
     right: 20px;
     z-index: 9999;
+}
+
+/* ------------------------
+   CARDS
+------------------------- */
+body.dark-mode .card {
+    background-color: #312f2f;
+    /* matches body exactly */
+    color: #e0e0e0;
+}
+
+body.dark-mode .card .card-subtitle,
+body.dark-mode .card .text-muted {
+    color: #b0b0b0 !important;
+}
+
+/* ------------------------
+   BADGES
+------------------------- */
+body.dark-mode .badge.bg-info {
+    background-color: #255070 !important;
+    color: #ddd !important;
+}
+
+body.dark-mode .badge.bg-warning {
+    background-color: #806000 !important;
+    color: #eee !important;
+}
+
+body.dark-mode .badge.bg-success {
+    background-color: #255025 !important;
+    color: #eee !important;
+}
+
+/* ------------------------
+   FORMS HELP TEXT IN DARK MODE
+------------------------- */
+body.dark-mode .form-text,
+body.dark-mode small.text-muted {
+    color: #f0eded !important;
 }

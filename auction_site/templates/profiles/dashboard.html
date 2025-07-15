@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Dashboard</h2>
-    <p class="text-muted">Welcome, {{ user.username }}! Here are your submitted scenes:</p>
+    <p class="text-muted">Welcome, {{ profile.name }}! Here are your submitted scenes:</p>
 
     {% if scenes %}
         <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
@@ -28,12 +28,9 @@
                             {% for bidder in scene.eligible_bidders.all %}
                                 <span class="badge bg-info text-dark">{{ bidder.code }}</span>
                             {% endfor %}
-                        </p>
-                        {% endif %}
-
-                        {% if scene.other_bidders %}
-                        <p class="card-text">
-                            <strong>Other:</strong> {{ scene.other_bidders }}
+                             {% if scene.other_bidders %}
+                                <span class="badge bg-info text-dark">{{ scene.other_bidders }}</span>
+                            {% endif %}
                         </p>
                         {% endif %}
 

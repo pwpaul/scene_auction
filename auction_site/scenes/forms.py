@@ -7,7 +7,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 class SceneForm(forms.ModelForm):
     class Meta:
         model = Scene
-        fields = ["role", "eligible_bidders", "other_bidders", "title", "short", "long"]
+        fields = ["title", "role", "eligible_bidders", "other_bidders", "short", "long"]
         widgets = {"eligible_bidders": forms.CheckboxSelectMultiple}
 
     def __init__(self, *args, **kwargs):

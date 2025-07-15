@@ -5,22 +5,22 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
 from .forms import ForcedPasswordChangeForm, ProfileForm
-from scenes.models import Scene
+from scenes.models import Scene, Auction
 
 
-@login_required
-def edit_profile(request):
-    profile = request.user.profile
+# @login_required
+# def edit_profile(request):
+#     profile = request.user.profile
 
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:
-        form = ProfileForm(instance=profile)
+#     if request.method == 'POST':
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('dashboard')
+#     else:
+#         form = ProfileForm(instance=profile)
 
-    return render(request, 'profiles/edit_profile.html', {'form': form})
+#     return render(request, 'profiles/edit_profile.html', {'form': form})
 
 
 @login_required
@@ -32,24 +32,29 @@ def dashboard(request):
         .order_by("-auction__date")
     )
     has_scenes = scenes.exists()
-    return render(
-        request, "profiles/dashboard.html", {"scenes": scenes, "has_scenes": has_scenes}
-    )
-
-
-# @login_required
-# def edit_profile(request):
-#     profile = request.user.profile
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Profile updated successfully.")
-#             return redirect("dashboard")
-#     else:
-#         form = ProfileForm(instance=profile)
-#     return render(request, "profiles/edit_profile.html", {"form": form})
-
+    if has_scenes:
+        return render(
+            request,
+            "profiles/dashboard.html",
+            {"profile": profile, "scenes": scenes, "has_scenes": has_scenes},
+        )
+    else:
+        # find the latest or soonest auction
+        auction = Auction.objects.order_by("-date").first()
+        if auction:
+            return redirect("add_scene", auction_id=auction.id)
+        else:
+            # fallback if no auctions exist
+            return render(
+                request,
+                "profiles/dashboard.html",
+                {
+                    "profile": profile,
+                    "scenes": scenes,
+                    "has_scenes": has_scenes,
+                    "error": "No auctions available yet.",
+                },
+            )
 @login_required
 def edit_profile(request):
     profile = request.user.profile
@@ -96,5 +101,3 @@ def home(request):
 
 def faq(request):
     return render(request, 'faq.html')
-
-

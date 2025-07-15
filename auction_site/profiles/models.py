@@ -43,25 +43,23 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # General info
-    name = models.CharField(max_length=100)
-    fet = models.CharField("fet name", max_length=100, blank=True)
+    name = models.CharField(max_length=100, help_text="This is your diplay name on this site.  It is not your login name.")
+    fet = models.CharField("fet name", max_length=100, blank=True, help_text="This is your Fetlife Username, if you have one.")
     pronouns = models.CharField(max_length=50, blank=True)
 
     # Image fields
-    pic_original = models.ImageField(
-        upload_to=profile_original_upload_to, blank=True, null=True
-    )
+    pic_original = models.ImageField("Profile Picture",
+        upload_to=profile_original_upload_to, blank=True, null=True,
+        help_text="This will be used during the auction")
     pic = models.ImageField(upload_to=profile_resized_upload_to, blank=True, null=True)
     pic_thumb = models.ImageField(
         upload_to=profile_thumb_upload_to, blank=True, null=True
     )
 
     # Auctioneer references
-    ref_pronouns = models.CharField("auction pronouns", max_length=50, blank=True)
-    ref_name = models.CharField("auction name", max_length=100, blank=True)
     ref_phys = models.BooleanField("ok to mention physical?", default=False)
-    ref_words = models.TextField("preferred words", blank=True)
-    ref_no_words = models.TextField("words to avoid", blank=True)
+    ref_words = models.TextField("preferred words", blank=True, help_text="Words you might like used to describe you in an auction")
+    ref_no_words = models.TextField("words to avoid", blank=True, help_text="Words you prefer not to be used in an auction")
 
     ready = models.BooleanField(default=False)
 
