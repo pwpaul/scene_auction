@@ -6,6 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 
 # Your custom User model
@@ -66,13 +68,26 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s profile"
 
+    def get_avatar_url(self):
+        try:
+            if self.pic_thumb and self.pic_thumb.name:
+                return self.pic_thumb.url
+            elif self.pic and self.pic.name:
+                return self.pic.url
+            elif self.pic_original and self.pic_original.name:
+                return self.pic_original.url
+        except ValueError:
+            # happens if file is missing on disk
+            pass
+        return "/static/img/default_profile.png"
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
         if self.pic_original:
             # Always create resized & thumb after saving original
             self._generate_image_version(self.pic_original, (800, 800), "resized")
-            self._generate_image_version(self.pic_original, (150, 150), "thumb")
+            self._generate_image_version(self.pic_original, (400, 400), "thumb")
 
     def _generate_image_version(self, source_field, size, version_name):
         img = Image.open(source_field.path)
@@ -94,3 +109,24 @@ class Profile(models.Model):
 
         buffer.close()
         super().save(update_fields=["pic", "pic_thumb"])
+
+    def delete(self, *args, **kwargs):
+        # Manual delete safeguard
+        if self.pic_thumb and os.path.isfile(self.pic_thumb.path):
+            os.remove(self.pic_thumb.path)
+        if self.pic and os.path.isfile(self.pic.path):
+            os.remove(self.pic.path)
+        if self.pic_original and os.path.isfile(self.pic_original.path):
+            os.remove(self.pic_original.path)
+        super().delete(*args, **kwargs)
+
+
+# Signal to always clean up files on delete
+@receiver(pre_delete, sender=Profile)
+def delete_profile_images(sender, instance, **kwargs):
+    if instance.pic_thumb and os.path.isfile(instance.pic_thumb.path):
+        os.remove(instance.pic_thumb.path)
+    if instance.pic and os.path.isfile(instance.pic.path):
+        os.remove(instance.pic.path)
+    if instance.pic_original and os.path.isfile(instance.pic_original.path):
+        os.remove(instance.pic_original.path)

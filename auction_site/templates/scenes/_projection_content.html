@@ -1,33 +1,45 @@
-<div class="row justify-content-center">
-    <div class="col-md-4 text-center mb-4">
-        <h2 class="fw-bold mb-2">{{ scene.profile.name }} 
-            <small class="text-muted">({{ scene.profile.pronouns }})</small>
-        </h2>
-        <img src="{{ scene.profile.get_avatar_url }}" class="img-fluid rounded shadow" alt="Profile Picture" style="max-height:400px;">
-    </div>
-    <div class="col-md-8 text-center text-md-start">
-        <h3 class="text-primary mb-3">{{ scene.title }}</h3>
-        
-        {% if scene.short %}
-            <p class="lead mb-4">{{ scene.short }}</p>
-        {% endif %}
-        
-        {% if scene.long %}
-            <p class="mb-4">{{ scene.long }}</p>
-        {% endif %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-start">
+        <!-- Left column -->
+        <div class="col-md-4 text-center mb-4 projection-column">
+            <h2 class="fw-bold mb-2">
+                {{ scene.profile.name }}
+                <small class="text-muted">({{ scene.profile.pronouns }})</small>
+            </h2>
+            <img src="{{ scene.profile.get_avatar_url }}"
+                 class="img-fluid rounded shadow"
+                 alt="Profile Picture"
+                 style="max-width:100%; height:auto; max-height:80vh;">
+        </div>
 
-        {% if scene.eligible_bidders.exists or scene.other_bidders %}
-            <div class="mt-3">
-                <h6 class="fw-semibold">Eligible Bidders:</h6>
-                <div class="mt-2">
-                    {% for bidder in scene.eligible_bidders.all %}
-                        <span class="badge bg-info text-dark fs-6 me-2">{{ bidder.code }}</span>
-                    {% endfor %}
-                    {% if scene.other_bidders %}
-                        <span class="badge bg-secondary fs-6">{{ scene.other_bidders }}</span>
-                    {% endif %}
+        <!-- Spacer column -->
+        <div class="col-md-1 d-none d-lg-block"></div>
+
+        <!-- Right column -->
+        <div class="col-md-7 text-center text-md-start projection-column">
+            <h3 class="text-primary mb-3">{{ scene.title }}</h3>
+            
+            {% if scene.short %}
+                <p class="lead mb-4">{{ scene.short }}</p>
+            {% endif %}
+            
+            {% if scene.long %}
+                <p class="mb-4">{{ scene.long }}</p>
+            {% endif %}
+
+            {% if scene.eligible_bidders.exists or scene.other_bidders %}
+                <div class="mt-3">
+                    <h6 class="fw-semibold">Eligible Bidders:</h6>
+                    <div class="mt-2">
+                        {% for bidder in scene.eligible_bidders.all %}
+                            <span class="badge bg-info text-dark fs-6 me-2">{{ bidder.code }}</span>
+                        {% endfor %}
+                        {% if scene.other_bidders %}
+                            <span class="badge bg-secondary fs-6">{{ scene.other_bidders }}</span>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </div>

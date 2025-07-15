@@ -1,22 +1,70 @@
-<div id="profile-form">
-    <form method="post" enctype="multipart/form-data" hx-post="{% url 'edit_profile' %}" hx-target="#profile-form" hx-swap="outerHTML">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary mt-2">Save</button>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
 
-        {% if form.errors %}
-            <div class="alert alert-danger mt-3">
-                <ul class="mb-0">
-                {% for field in form %}
-                    {% for error in field.errors %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Profile</h2>
+
+    <div id="profile-form">
+        <form method="post" enctype="multipart/form-data"
+              hx-post="{% url 'edit_profile' %}" hx-target="#profile-form" hx-swap="outerHTML">
+            {% csrf_token %}
+
+            {{ form.name|as_crispy_field }}
+            {{ form.fet|as_crispy_field }}
+            {{ form.pronouns|as_crispy_field }}
+
+            <div class="mb-3">
+                {% if form.instance.pic_original %}
+                    <p>Current profile picture:</p>
+                    <img src="{{ form.instance.get_avatar_url }}" alt="Profile picture"
+                         class="img-fluid rounded shadow" style="max-height:200px;">
+
+                    <div class="form-check mt-2">
+                        <input type="checkbox"
+                               name="{{ form.pic_original.clear_checkbox_name }}"
+                               id="{{ form.pic_original.clear_checkbox_id }}"
+                               class="form-check-input"
+                               value="true">
+                        <label for="{{ form.pic_original.clear_checkbox_id }}" class="form-check-label">
+                            Delete current picture
+                        </label>
+                    </div>
+                {% else %}
+                    <label for="{{ form.pic_original.id_for_label }}" class="form-label">Profile picture</label>
+                    <input type="file"
+                           name="{{ form.pic_original.html_name }}"
+                           id="{{ form.pic_original.id_for_label }}"
+                           class="form-control">
+                    {% if form.pic_original.errors %}
+                        <div class="text-danger">{{ form.pic_original.errors }}</div>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            {{ form.ref_pronouns|as_crispy_field }}
+            {{ form.ref_name|as_crispy_field }}
+            {{ form.ref_phys|as_crispy_field }}
+            {{ form.ref_words|as_crispy_field }}
+            {{ form.ref_no_words|as_crispy_field }}
+
+            <button type="submit" class="btn btn-primary mt-2">Save</button>
+
+            {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                    <ul class="mb-0">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
                         <li>{{ error }}</li>
                     {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    </form>
+                    </ul>
+                </div>
+            {% endif %}
+        </form>
+    </div>
 </div>
+{% endblock %}
